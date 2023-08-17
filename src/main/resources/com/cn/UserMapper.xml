@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口-->
+<mapper namespace="com.cn.UserMapper">
+    <resultMap id="studentResult" type="com.sudo.model.Student">
+        <id property="id" column="student_id"/>
+        <result property="student_name" column="student_name"/>
+        <association property="cl" javaType="com.sudo.model.Cl" column="class_id" >
+        <id property="class_id" column="class_id"/>
+        <result property="class_name" column="class_name"/>
+        </association>
+        <collection property="stadys"  ofType="com.sudo.model.Stady" column="stady_id" >
+            <id property="stady_id" column="stady_id"/>
+            <result property="stady_name" column="stady_name"/>
+        </collection>
+    </resultMap>
+    <select id="selectstudent" resultMap="studentResult">
+        select
+        student.student_id,student.student_name ,student.class_id,class.class_name
+        from student
+        left outer join class on student.class_id = class.class_id
+    </select>
+
+     <select id="selectstady"  resultMap="studentResult">
+         select
+         t.student_id,t.student_name,t1.class_id,t2.stady_name,t2.stady_id
+         from student t
+         left outer join class t1 on t.class_id=t1.class_id
+         left outer join stady t2 on t.student_id=t2.student_id
+     </select>
+
+    <!--select查询语句-->
+
+</mapper>

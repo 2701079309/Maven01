@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<style type="text/css">
+    ul{
+        width: 600px;
+        height: 40px;
+    <!--		border:1px solid red;-->
+        list-style:none;
+    }
+    ul li{
+        width: 100px;
+        height: 30px;
+        background: #f7f7f7;
+        border: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        display:inline-block;
+        text-align: center;
+        margin-left: -14px;
+        margin-top:5px;
+        cursor: pointer;
+
+    }
+    ul li:hover{
+        color: red;
+    }
+    .selected{
+        background: red;
+        color: white;
+
+    }
+    .selectedli{
+        width: 600px;
+        height: auto;
+        display:block;
+    }
+    .noselectedli{
+        display:none;
+    }
+
+
+</style>
+<script>
+    function saw(his){
+        let lis = document.getElementsByTagName("li")
+        let hasIndex = 0;
+        for(let index=0;index<lis.length;index++){
+            if(lis[index]==his){
+                hasIndex = index;
+            }
+            lis[index].setAttribute("class","");
+        }
+        his.setAttribute("class","selected");
+        let divs = document.getElementById("selectedli");
+        let chilDivs = divs.children;
+        for(index=0;index<chilDivs.length;index++){
+            chilDivs[index].setAttribute("class","noselectedli");
+        }
+        chilDivs[hasIndex].setAttribute("class","selectedli");
+    }
+
+</script>
+<body>
+<ul>
+    <li class = "selected"onclick = "saw(this)">商品介绍</li>
+    <li onclick = "saw(this)">规格和包装</li>
+    <li onclick = "saw(this)">吾儿肖雄</li>
+    <li onclick = "saw(this)">吾儿刘袁</li>
+    <li onclick = "saw(this)">大彻大悟</li>
+</ul>
+<div id="selectedli">
+    <div class= "selected1">品牌： 联想（Lenovo）
+        商品名称：联想（Lenovo）Lenovo 小新商品编号：10037526821476商品毛重：2.55kg屏幕尺寸：14.0-14.9英寸系列
+        ：联想-小新Pro屏幕色域：100%sRGB内存容量：16GB类型：轻薄笔记本固态硬盘（SSD）：512GB优选服务：两年质保支持IPv6：支持IPv6处理器：
+        AMD R5屏幕刷新率：90Hz机身材质：金属厚度：15.0mm及以下显卡型号：集成显卡系统：Windows 11显卡芯片供应商：其他机械硬盘：无机械硬盘</div>
+    <div class = "selected2">
+        主体
+        认证型号
+        Lenovo 小新 Pro 14ACH 2021x
+        型号
+        小新Pro 14
+        网络传输
+        局域网
+        10/100/1000Mbps
+        蓝牙版本
+        蓝牙5.0-5.1
+        端口
+        音频接口
+        耳机、麦克风二合一接口 3.5mm
+        显示端口
+        Type-C</div>
+    <div class = "selected3">
+        <img src="./images./R-C.jpg"width="600px"height="400px"></div>
+    <div class = "selected4"style="font-size:20px;color:green">
+        简介：<br>
+        姓名：刘袁<br>
+        性别：公<br>
+        爱好：唱，跳，rap，李勇<br>
+        特殊癖好：一顿三斤小汉堡<br>
+        穷逼一个，<br>
+        自像画在此<br>
+        <img src = "./images./chou.jpg"width="600px"height="400px">
+    </div>
+    <div class = "selected5">
+        <img src = "./images./QQ图片20220721164622.jpg"width="600px"height="400px">
+    </div>
+</div>
+</body>
+

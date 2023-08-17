@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口-->
+<mapper namespace="com.cn.ClMapper">
+    <resultMap id="classResultmap" type="com.sudo.model.Cl">
+        <id property="class_id" column="class_id"/>
+        <result property="class_name" column="class_name"/>
+        <collection property="students" javaType="com.sudo.model.Student"  >
+        <id property="student_id" column="student_id"/>
+        <result property="student_name" column="student_name"/>
+            <collection property="stadys" javaType="com.sudo.model.Stady">
+                <id property="stady_id" column="stady_id"/>
+                <result property="stady_name" column="stady_name"/>
+            </collection>
+
+        </collection>
+    </resultMap>
+    <select id="selectclass" resultMap="classResultmap">
+        select
+        t.class_id,t.class_name,t1.student_name,
+        t2.stady_id,t2.stady_name
+        from class t
+        left outer join student t1 on
+        t.class_id=t1.class_id
+        left outer join stady t2 on
+        t1.student_id=t2.student_id
+    </select>
+</mapper>

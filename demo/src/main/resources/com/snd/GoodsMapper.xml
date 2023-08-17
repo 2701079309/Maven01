@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.service.goodsdao">
+    <resultMap id="goodsresultMap" type="com.example.demo.entity.goods">
+        <id property="goods_id" column="goods_id"/>
+        <result property="goods_name" column="goods_name"/>
+        <result column="count" property="count"/>
+    </resultMap>
+
+    <select id="selectgoods" resultMap="goodsresultMap">
+        select <include refid="sqlBase"/> from goods where goods_id=#{goods_id} for update
+    </select>
+
+    <update id="update" parameterType="com.example.demo.entity.goods">
+        update goods set goods_name=#{goods_name},num=#{num} where goods_id=#{goods_id}
+    </update>
+    <sql id="sqlBase">
+        goods_id,goods_name,num
+    </sql>
+</mapper>

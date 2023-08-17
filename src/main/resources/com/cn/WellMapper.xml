@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口-->
+<mapper namespace="com.cn.WellMapper">
+    <select id="listWell" resultMap="wellResult">
+        select
+        well.id,well.org,well.type,rectangle.length,rectangle.width,circle.redius
+        from well
+        left outer join
+        rectangle on well.id=rectangle.id
+        left outer join
+        circle on well.id=circle.id
+        <where>
+            <if test="type!=null">
+                and type=#{type}
+            </if>
+        </where>
+    </select>
+    <insert id="insertWell" useGeneratedKeys="true" keyProperty="id">
+        insert into well(
+        org,type,length,width)values
+        <foreach item="item" collection="list" separator=",">
+            (#{item.org},#{item.type},#{item.length},#{item.width})
+        </foreach>
+    </insert>
+    <resultMap id="wellResult" type="com.sudo.model.Well">
+        <id property="id" column="id"/>
+        <result property="org" column="org"/>
+        <discriminator javaType="byte" column="type">
+            <case value="1" resultType="com.sudo.model.Rectangle">
+                <result property="length" column="length"/>
+                <result property="width" column="width"/>
+            </case>
+            <case value="2" resultType="com.sudo.model.Circle">
+                <result property="radius" column="radius"/>
+            </case>
+        </discriminator>
+    </resultMap>
+</mapper>
