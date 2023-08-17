@@ -17,7 +17,7 @@ public class MyDatepeHandler extends BaseTypeHandler<String> {
     }
 @Override
     public String getNullableResult(ResultSet resultSet, String s) throws SQLException {
-    System.out.println("=====1111122222");
+    System.out.println("=====1111122222333");
         return resultSet.getString(s).replace("2","%");
     }
 @Override
